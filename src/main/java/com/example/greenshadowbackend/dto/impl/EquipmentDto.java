@@ -1,5 +1,6 @@
 package com.example.greenshadowbackend.dto.impl;
 
+import com.example.greenshadowbackend.dto.EquipmentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,13 +10,11 @@ import java.awt.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EquipmentDto {
-    private String FieldCode;
-    private String FieldName;
-    private Point location;
-    private Double extent_size;
-    private String image1;
-    private String image2;
-    private List<CropDto> cropDTOS;
-    private List<String> staffIds;
+public class EquipmentDto implements EquipmentStatus {
+  private String EquipmentId;
+  private String name;
+  private String type;
+  private String status;
+  private String staffId;
+  private String fieldId;
 }

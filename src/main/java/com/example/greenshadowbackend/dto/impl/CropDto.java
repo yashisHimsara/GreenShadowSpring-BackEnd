@@ -1,5 +1,6 @@
 package com.example.greenshadowbackend.dto.impl;
 
+import com.example.greenshadowbackend.dto.CropStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CropDto {
+public class CropDto implements CropStatus {
     private String cropCode;
     private String commonName;
     private String scientificName;
