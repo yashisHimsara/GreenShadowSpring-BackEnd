@@ -1,7 +1,6 @@
 package com.example.greenshadowbackend.dto.impl;
 
 import com.example.greenshadowbackend.dto.FieldStatus;
-
 import java.awt.*;
 import java.util.List;
 
