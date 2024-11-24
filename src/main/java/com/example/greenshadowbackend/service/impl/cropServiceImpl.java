@@ -4,6 +4,7 @@ package com.example.greenshadowbackend.service.impl;
 import com.example.greenshadowbackend.Dao.CropDao;
 import com.example.greenshadowbackend.Dao.FieldDao;
 import com.example.greenshadowbackend.dto.impl.CropDto;
+import com.example.greenshadowbackend.entity.impl.CropEntity;
 import com.example.greenshadowbackend.service.CropService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,7 @@ public class cropServiceImpl implements CropService {
 
     @Override
     public void saveCrop(CropDto cropDto) {
-
-
+        CropEntity saveCrop = cropDto.save(mapping)
     }
 
     @Override
