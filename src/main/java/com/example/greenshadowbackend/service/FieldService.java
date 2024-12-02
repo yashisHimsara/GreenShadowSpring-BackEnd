@@ -1,11 +1,10 @@
 package com.example.greenshadowbackend.service;
 
 import com.example.greenshadowbackend.dto.impl.FieldDto;
-import com.example.greenshadowbackend.dto.impl.FieldStaffDto;
 
 import java.util.List;
 
-public interface fieldService {
+public interface FieldService {
     void saveField(FieldDto fieldDto);
 
     List<FieldDto> getAllFields();
@@ -16,7 +15,7 @@ public interface fieldService {
 
     FieldDto getSelectedFieldByName(String name);
 
-    void saveFieldStaff(FieldStaffDto fieldStaffDto);
-
-    void deleteFieldStaff(String fieldCode, String staffId);
+//    void saveFieldStaff(FieldStaffDto fieldStaffDto0);
+//
+//    void deleteFieldStaff(String fieldCode, String staffId);
 }

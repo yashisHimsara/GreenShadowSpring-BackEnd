@@ -38,13 +38,22 @@ public class StaffEntity implements SuperEntity {
     @Column(unique = true)
     private String email;
     private Role role;
-    @ManyToMany(mappedBy = "staffs", cascade = CascadeType.ALL)
-    private List<FieldEntity> fields;
-    @OneToMany(mappedBy = "staff")
+
+    @ManyToOne // Change this to ManyToOne
+    @JoinColumn(name = "fieldId") // Ensure this matches the field in FieldEntity
+    private FieldEntity field; // Change from fields to field
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<VehicleEntity> vehicles;
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "staffEquipment",
+            joinColumns = @JoinColumn(name = "staffId"),
+            inverseJoinColumns = @JoinColumn(name = "equipmentId")
+    )
     private List<EquipmentEntity> equipment;
-    @ManyToMany(mappedBy = "staffs", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "staffs",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<MonitoringLogEntity> logs;
 
 }

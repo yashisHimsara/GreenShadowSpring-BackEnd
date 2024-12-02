@@ -29,19 +29,20 @@ public class FieldEntity implements SuperEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String image2;
 
-    @OneToMany(mappedBy = "field")
-    private List<CropEntity> cropDTOS;
+    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<CropEntity> crops;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "staff_field_details",
-            joinColumns = @JoinColumn(name = "field_code"),
-            inverseJoinColumns = @JoinColumn(name = "staff_id")
-    )
+    @OneToMany(mappedBy = "field",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<StaffEntity> staffs;
 
-    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(
+            name = "FieldEquipment",
+            joinColumns = @JoinColumn(name = "fieldId"),
+            inverseJoinColumns = @JoinColumn(name = "equipmentId")
+    )
     private List<EquipmentEntity> equipment;
-    @ManyToMany(mappedBy = "fields", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+
+    @OneToMany(mappedBy = "fields",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<MonitoringLogEntity> logs;
 }

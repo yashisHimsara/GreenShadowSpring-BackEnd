@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,10 +20,8 @@ public class EquipmentEntity implements SuperDTO {
     private String name;
     private String status;
     private String type;
-    @ManyToOne
-    @JoinColumn(name = "staff_id")
-    private StaffEntity staff;
-    @ManyToOne
-    @JoinColumn(name = "field_id")
-    private FieldEntity field;
+    @ManyToMany(mappedBy = "equipment", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<StaffEntity> staff;
+    @ManyToMany(mappedBy = "equipment", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+   private List<FieldEntity> fields;
 }

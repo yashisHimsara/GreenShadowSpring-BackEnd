@@ -25,8 +25,8 @@ public class CropEntity implements SuperDTO {
     private String category;
     private String season;
     @ManyToOne
-    @JoinColumn(name = "field_code",nullable = false)
+    @JoinColumn(name = "fieldCode",nullable = false)
     private FieldEntity field;
-    @ManyToMany(mappedBy = "crops", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "crops", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonitoringLogEntity> logs;
 }
