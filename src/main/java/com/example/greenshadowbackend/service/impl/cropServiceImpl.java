@@ -1,8 +1,10 @@
 package com.example.greenshadowbackend.service.impl;
 
 
+import com.example.greenshadowbackend.CustomStatusCode.ErrorStatusCodes;
 import com.example.greenshadowbackend.Dao.CropDao;
 import com.example.greenshadowbackend.Dao.FieldDao;
+import com.example.greenshadowbackend.dto.CropStatus;
 import com.example.greenshadowbackend.dto.impl.CropDto;
 import com.example.greenshadowbackend.entity.impl.CropEntity;
 import com.example.greenshadowbackend.exception.CropNotFoundException;
@@ -24,55 +26,58 @@ import java.util.PrimitiveIterator;
 public class cropServiceImpl implements CropService {
     @Autowired
     private CropDao cropDao;
-
     @Autowired
-    private FieldDao fieldDao;
+    private Mapping cropMapping;
 
-    @Autowired
-    private Mapping mapping;
 
     @Override
     public void saveCrop(CropDto cropDto) {
         cropDto.setCropCode(AppUtil.generateCropCode());
-        CropEntity saveCrop = cropDao.save(mapping.toCropEntity(cropDto));
-        if(saveCrop==null){
-            throw new DataPersistException("Crop notsave");
+        CropEntity saveCrop=CropDao.save(cropMapping.toCropEntity(cropDto));
+        if (saveCrop==null){
+            throw new DataPersistException("Crop not saved");
         }
+
     }
 
     @Override
-    public List<CropDto> grtAllCrops() {
-        return null;
+    public List<CropDto> getAllCrops() {
+        return cropMapping.asCropDTOList(cropDao.findAll());
     }
 
     @Override
-    public void deleteCrop(String cropCode) {
-        Optional<CropEntity> foundCrop = cropDao.findById(cropCode);
-        if(!foundCrop.isPresent()){
-            throw new CropNotFoundException("Crop Not found");
+    public CropStatus getCrop(String cropId) {
+        if (cropDao.existsById(cropId)){
+            var selectedUser = cropDao.getReferenceById(cropId);
+            return cropMapping.toCropDTO(selectedUser);
         }else {
-            cropDao.deleteById(cropCode);
+            return new ErrorStatusCodes(1,"Selected Crop not found");
+        }
+
+    }
+
+    @Override
+    public void deleteCrop(String cropId) {
+        Optional<CropEntity> foundCrop = cropDao.findById(cropId);
+        if (!foundCrop.isPresent()){
+            throw new CropNotFoundException("Crop Not Found");
+        }else {
+            cropDao.deleteById(cropId);
         }
     }
 
     @Override
-    public void updateCrop(String cropcode, CropDto cropDto) {
-        Optional<CropEntity> findCrop = cropDao.findById(cropcode);
-        if(!findCrop.isPresent()){
-            throw new CropNotFoundException("Crop Not found");
+    public void updateCrop(String cropId, CropDto cropDto) {
+        Optional<CropEntity> findCrop =cropDao.findById(cropId);
+        if (!findCrop.isPresent()){
+            throw new CropNotFoundException("Crop Not Found");
         }else {
             findCrop.get().setCommonName(cropDto.getCommonName());
             findCrop.get().setScientificName(cropDto.getScientificName());
             findCrop.get().setImage(cropDto.getImage());
             findCrop.get().setCategory(cropDto.getCategory());
             findCrop.get().setSeason(cropDto.getSeason());
-//            findCrop.get().setField(cropDto.getFieldCode());
+            findCrop.get().setField(cropDto.getFieldCode());
         }
-
-    }
-
-    @Override
-    public CropDto getSelectedCropByName(String name) {
-        return null;
     }
 }
