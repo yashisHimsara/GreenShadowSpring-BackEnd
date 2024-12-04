@@ -7,13 +7,9 @@ import java.util.List;
 
 public interface VehicleService {
     void saveVehicle(VehicleDto vehicleDto);
-
-    List<VehicleDto> getAllVehicle();
-
-    void deleteVehicle(String vehicleCode);
-
-    void updateVehicle(String vehicleCode, VehicleDto vehicleDto);
-
-    VehicleStatus getSelectedVehicleByLicensePlateNum(String licensePlateNum);
+    List<VehicleDto> getAllVehicles();
+    VehicleStatus getVehicle(String vehicleId);
+    void deleteVehicle(String vehicleId);
+    void updateVehicle(String vehicleId, VehicleDto vehicleDto);
 
 }

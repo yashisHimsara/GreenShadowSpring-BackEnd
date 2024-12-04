@@ -12,8 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 public class MonitoringLogDto implements SuperDTO {
     private String logCode;
-    private Date logDate;
-    private String logDetails;
+    private String tempId;
+    private Date date;
+    private String details;
     private String image;
     private List<FieldDto> fields;
     private List<CropDto> crops;

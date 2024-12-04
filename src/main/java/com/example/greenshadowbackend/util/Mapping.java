@@ -46,18 +46,18 @@ public class Mapping {
     public StaffEntity toStaffEntity(StaffDto staffDto){
         return mapper.map(staffDto , StaffEntity.class);
     }
-    public List<StaffDto> asStaffDTOList(List<StaffEntity> staffEntities){
+    public List<StaffDto> asStaffDtoList(List<StaffEntity> staffEntities){
         return mapper.map(staffEntities, new TypeToken<List<StaffDto>>(){}.getType());
     }
 
     /*Vehicle Mapping--------------*/
-    public VehicleDto toVehicleDTO(VehicleEntity vehicleEntity){
+    public VehicleDto toVehicleDto(VehicleEntity vehicleEntity){
         return mapper.map(vehicleEntity, VehicleDto.class);
     }
     public VehicleEntity toVehicleEntity(VehicleDto vehicleDto){
         return mapper.map(vehicleDto, VehicleEntity.class);
     }
-    public List<VehicleDto> asVehicleDTOList(List<VehicleEntity> vehicleEntities){
+    public List<VehicleDto> asVehicleDtoList(List<VehicleEntity> vehicleEntities){
         return mapper.map(vehicleEntities, new TypeToken<List<VehicleDto>>(){}.getType());
     }
 
@@ -80,15 +80,15 @@ public class Mapping {
         return mapper.map(monitoringLogDto, MonitoringLogEntity.class);
     }
 
-    public List<MonitoringLogDto> asLogDTOList(List<MonitoringLogEntity> logEntities) {
+    public List<MonitoringLogDto> asLogDtoList(List<MonitoringLogEntity> logEntities) {
         return mapper.map(logEntities,new TypeToken<List<MonitoringLogDto>>(){}.getType());
     }
-    public MonitoringLogDto toLogDTO(MonitoringLogEntity monitoringLogEntitytity) {
-        return mapper.map(monitoringLogEntitytity,MonitoringLogDto.class);
+    public MonitoringLogDto toLogDto(MonitoringLogEntity monitoringLogEntity) {
+        return mapper.map(monitoringLogEntity,MonitoringLogDto.class);
     }
 
     /* User Mapping */
-    public UserDto toUserDTO(UserEntity userEntity) {
+    public UserDto toUserDto(UserEntity userEntity) {
         return mapper.map(userEntity, UserDto.class);
     }
 
@@ -96,7 +96,7 @@ public class Mapping {
         return mapper.map(userDto, UserEntity.class);
     }
 
-    public List<UserDto> asUserDTOList(List<UserEntity> userEntities) {
+    public List<UserDto> asUserDtoList(List<UserEntity> userEntities) {
         return mapper.map(userEntities, new TypeToken<List<UserDto>>() {}.getType());
     }
 }
