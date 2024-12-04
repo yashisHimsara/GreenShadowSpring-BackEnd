@@ -67,11 +67,11 @@ public class Mapping {
         return mapper.map(equipmentDto, EquipmentEntity.class);
     }
 
-    public List<EquipmentDto> asEquipmentDTOList(List<EquipmentEntity> equipmentEntities) {
+    public List<EquipmentDto> asEquipmentDtoList(List<EquipmentEntity> equipmentEntities) {
         return mapper.map(equipmentEntities,new TypeToken<List<EquipmentDto>>(){}.getType());
     }
 
-    public EquipmentDto toEquipmentDTO(EquipmentEntity equipmentEntity) {
+    public EquipmentDto toEquipmentDto(EquipmentEntity equipmentEntity) {
         return mapper.map(equipmentEntity,EquipmentDto.class);
     }
 

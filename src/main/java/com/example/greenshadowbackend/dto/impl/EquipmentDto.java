@@ -11,10 +11,10 @@ import java.awt.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EquipmentDto implements EquipmentStatus {
-  private String EquipmentId;
+  private String equipmentId;
   private String name;
-  private String type;
   private String status;
+  private String type;
+  private String field_code;
   private String staffId;
-  private String fieldId;
 }

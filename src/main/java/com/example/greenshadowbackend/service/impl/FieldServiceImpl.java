@@ -1,6 +1,8 @@
 package com.example.greenshadowbackend.service.impl;
 
+import com.example.greenshadowbackend.CustomStatusCode.ErrorStatusCodes;
 import com.example.greenshadowbackend.Dao.FieldDao;
+import com.example.greenshadowbackend.dto.FieldStatus;
 import com.example.greenshadowbackend.dto.impl.FieldDto;
 import com.example.greenshadowbackend.entity.impl.FieldEntity;
 import com.example.greenshadowbackend.exception.DataPersistException;
@@ -19,59 +21,61 @@ import java.util.Optional;
 @Transactional
 public class FieldServiceImpl implements FieldService {
 
-    @Autowired
+     @Autowired
     private FieldDao fieldDao;
+
     @Autowired
     private Mapping fieldMapping;
 
     @Override
     public void saveField(FieldDto fieldDto) {
         fieldDto.setFieldCode(AppUtil.generateFieldCode());
-        FieldEntity saveField = fieldDao.save(fieldMapping.toFieldEntity((fieldDto)));
-        if(saveField == null){
-            throw new DataPersistException(("note not save"));
+        FieldEntity saveField = fieldDao.save(fieldMapping.toFIeldEntity(fieldDto));
+        if (saveField==null){
+            throw new DataPersistException("Field not Saved!");
         }
+
     }
 
     @Override
     public List<FieldDto> getAllFields() {
-        return null;
+        return fieldMapping.asFieldDTOList(fieldDao.findAll());
     }
 
-    @Override
-    public void updateField(String fieldCode, FieldDto fieldDto) {
-        Optional<FieldEntity> findField = fieldDao.findById(fieldCode);
-        if(!findField.isPresent()){
-            throw new FieldNotFoundException("Field Not Found");
-        }else {
 
-            // TODO: 01/12/2024 methana aulk tiynw
-//            findField.get().getFieldName(fieldDto.getFieldName());
+
+    @Override
+    public void deleteField(String fieldId) {
+        Optional<FieldEntity> foundField=fieldDao.findById(fieldId);
+        if (!foundField.isPresent()){
+            throw new FieldNotFoundException("Field not Found");
+        }else {
+            fieldDao.deleteById(fieldId);
         }
     }
 
     @Override
-    public void deleteField(String fieldCode) {
-        Optional<FieldEntity> foundField = fieldDao.findById(fieldCode);
-        if(!foundField.isPresent()){
-            throw new FieldNotFoundException("Field Not Found");
+    public FieldStatus getField(String fieldId) {
+        if (fieldDao.existsById(fieldId)){
+            var selectedField=fieldDao.getReferenceById(fieldId);
+            return fieldMapping.tofieldDTO(selectedField);
         }else {
-            fieldDao.deleteById(fieldCode);
+            return new ErrorStatusCodes(1,"Selected Field not found");
+
         }
     }
 
     @Override
-    public FieldDto getSelectedFieldByName(String name) {
-        return null;
+    public void updateField(String fieldId, FieldDto fieldDto) {
+        Optional<FieldEntity> findField = fieldDao.findById(fieldId);
+        if (!findField.isPresent()){
+            throw new FieldNotFoundException("Field not Found");
+        }else {
+            findField.get().setFieldName(fieldDto.getFieldName());
+            findField.get().setLocation(fieldDto.getLocation());
+            findField.get().setExtentSize(fieldDto.getExtent_size());
+            findField.get().setImage1(fieldDto.getImage1());
+            findField.get().setImage2(fieldDto.getImage2());
+        }
     }
-
-//    @Override
-//    public void saveFieldStaff(FieldStaffDto fieldStaffDto) {
-//
-//    }
-//
-//    @Override
-//    public void deleteFieldStaff(String fieldCode, String staffId) {
-//
-//    }
 }

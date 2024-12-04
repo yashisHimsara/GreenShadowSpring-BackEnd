@@ -3,7 +3,6 @@ package com.example.greenshadowbackend.service.impl;
 
 import com.example.greenshadowbackend.CustomStatusCode.ErrorStatusCodes;
 import com.example.greenshadowbackend.Dao.CropDao;
-import com.example.greenshadowbackend.Dao.FieldDao;
 import com.example.greenshadowbackend.dto.CropStatus;
 import com.example.greenshadowbackend.dto.impl.CropDto;
 import com.example.greenshadowbackend.entity.impl.CropEntity;
@@ -19,11 +18,10 @@ import com.example.greenshadowbackend.exception.DataPersistException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.PrimitiveIterator;
 
 @Service
 @Transactional
-public class cropServiceImpl implements CropService {
+public class CropServiceImpl implements CropService {
     @Autowired
     private CropDao cropDao;
     @Autowired
@@ -33,7 +31,7 @@ public class cropServiceImpl implements CropService {
     @Override
     public void saveCrop(CropDto cropDto) {
         cropDto.setCropCode(AppUtil.generateCropCode());
-        CropEntity saveCrop=CropDao.save(cropMapping.toCropEntity(cropDto));
+        CropEntity saveCrop=cropDao.save(cropMapping.toCropEntity(cropDto));
         if (saveCrop==null){
             throw new DataPersistException("Crop not saved");
         }
@@ -77,7 +75,7 @@ public class cropServiceImpl implements CropService {
             findCrop.get().setImage(cropDto.getImage());
             findCrop.get().setCategory(cropDto.getCategory());
             findCrop.get().setSeason(cropDto.getSeason());
-            findCrop.get().setField(cropDto.getFieldCode());
+            findCrop.get().setFieldCode(cropDto.getFieldCode());
         }
     }
 }
