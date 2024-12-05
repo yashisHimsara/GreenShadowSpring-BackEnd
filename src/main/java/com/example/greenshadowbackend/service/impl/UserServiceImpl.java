@@ -28,11 +28,8 @@ public class UserServiceImpl implements UserService {
     private Mapping userMapping;
     @Override
     public void saveUser(UserDto userDto) {
-        userDto.setUserId(AppUtil.generateUserCode());
-        UserEntity saveUser = userDao.save(userMapping.toUserEntity(userDto));
-        if (saveUser != null) {
-            throw new DataPersistException("User not saved");
-        }
+         userDao.save(userMapping.toUserEntity(userDto));
+
     }
 
     @Override
@@ -66,7 +63,6 @@ public class UserServiceImpl implements UserService {
         if (!findUser.isPresent()){
             throw new UserNotFoundException("Selected User not found");
         }else {
-            findUser.get().setUserName(userDto.getUserName());
             findUser.get().setEmail(userDto.getEmail());
             findUser.get().setPassword(userDto.getPassword());
             findUser.get().setRole(userDto.getRole());

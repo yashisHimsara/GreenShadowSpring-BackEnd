@@ -16,14 +16,14 @@ import java.util.List;
 @Table(name = "vehicle")
 public class VehicleEntity implements SuperEntity {
     @Id
-    private String vehicle_code;
-    @Column(unique = true)
-    private String licensePlateNum;
-    private String category;
-    private String fuel_type;
-    private String status;
-    private String remarks;
+    String vehicleCode;
+    String licensePlateNum;
+    String category;
+    String fuelType;
+    String status;
+    String remarks;
+
     @ManyToOne
-    @JoinColumn(name = "staff_id",nullable = false)
-    private StaffEntity staff;
+    @JoinColumn(name = "id")
+    StaffEntity staff;
 }

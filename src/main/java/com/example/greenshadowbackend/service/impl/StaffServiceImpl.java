@@ -26,13 +26,15 @@ public class StaffServiceImpl implements StaffService {
 
     @Autowired
     private Mapping staffMapping;
+
     @Override
     public void saveStaff(StaffDto staffDto) {
-        staffDto.setStaffId(AppUtil.generateStaffCode());
+        staffDto.setId(AppUtil.generateStaffCode());
         StaffEntity saveStaff=staffDao.save(staffMapping.toStaffEntity(staffDto));
         if (saveStaff!=null) {
             throw new DataPersistException("Staff not saved");
         }
+
     }
 
     @Override
@@ -58,7 +60,6 @@ public class StaffServiceImpl implements StaffService {
         }else {
             staffDao.deleteById(staffId);
         }
-
     }
 
     @Override
@@ -73,14 +74,11 @@ public class StaffServiceImpl implements StaffService {
             findStaff.get().setGender(staffDTO.getGender());
             findStaff.get().setJoinedDate(staffDTO.getJoinedDate());
             findStaff.get().setDob(staffDTO.getDob());
-            findStaff.get().setAddress1(staffDTO.getAddress1());
-            findStaff.get().setAddress2(staffDTO.getAddress2());
-            findStaff.get().setAddress3(staffDTO.getAddress3());
-            findStaff.get().setAddress4(staffDTO.getAddress4());
-            findStaff.get().setAddress5(staffDTO.getAddress5());
-            findStaff.get().setContactNo(staffDTO.getContactNo());
+            findStaff.get().setAddress(staffDTO.getAddress());
+            findStaff.get().setContact(staffDTO.getContact());
             findStaff.get().setEmail(staffDTO.getEmail());
             findStaff.get().setRole(staffDTO.getRole());
+            /*staffDAO.save(findStaff.get());*/
         }
     }
 }

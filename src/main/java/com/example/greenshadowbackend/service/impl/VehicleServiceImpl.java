@@ -68,7 +68,7 @@ public class VehicleServiceImpl implements VehicleService {
         }else {
             findVehicle.get().setLicensePlateNum(vehicleDto.getLicensePlateNum());
             findVehicle.get().setCategory(vehicleDto.getCategory());
-            findVehicle.get().setFuel_type(vehicleDto.getFuel_type());
+            findVehicle.get().setFuelType(vehicleDto.getFuelType());
             findVehicle.get().setStatus(vehicleDto.getStatus());
             findVehicle.get().setRemarks(vehicleDto.getRemarks());
         }

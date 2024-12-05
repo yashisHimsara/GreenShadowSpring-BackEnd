@@ -4,6 +4,8 @@ import com.example.greenshadowbackend.dto.StaffStatus;
 import com.example.greenshadowbackend.enums.Designation;
 import com.example.greenshadowbackend.enums.Gender;
 import com.example.greenshadowbackend.enums.Role;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,22 +16,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StaffDto implements StaffStatus {
-    private String StaffId;
-    private String firstName;
-    private String lastName;
-    private Designation designation;
-    private Gender gender;
-    private Date joinedDate;
-    private Date dob;
-    private String address1;
-    private String address2;
-    private String address3;
-    private String address4;
-    private String address5;
-    private String contactNo;
-    private String email;
-    private Role role;
-    private List<FieldDto> fields;
-    private List<VehicleDto> vehicles;
+    String id;
+    String firstName;
+    String lastName;
+    String designation;
+    @Enumerated(EnumType.STRING)
+    Gender gender;
+    Date joinedDate;
+    Date dob;
+    String address;
+    String contact;
+    String email;
+    @Enumerated(EnumType.STRING)
+    Role role;
+    List<FieldDto> fields;
 
 }

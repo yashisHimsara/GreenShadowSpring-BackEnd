@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface LogMonitoringDao extends JpaRepository<MonitoringLogEntity, String> {
-    Optional<FieldEntity> findByFieldName(String name);
+//    Optional<FieldEntity> findByFieldName(String name);
 
 }

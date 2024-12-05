@@ -27,6 +27,7 @@ public class LogServiceImpl implements LogMonitoringService {
     @Autowired
     private Mapping logMapping;
 
+
     @Override
     public void saveLog(MonitoringLogDto monitoringLogDto) {
         monitoringLogDto.setLogCode(AppUtil.generateLogCode());
@@ -34,6 +35,7 @@ public class LogServiceImpl implements LogMonitoringService {
         if (saveLog==null){
             throw new DataPersistException("Log not saved");
         }
+
     }
 
     @Override
@@ -63,16 +65,16 @@ public class LogServiceImpl implements LogMonitoringService {
     }
 
     @Override
-    public void updateLog(String logId, MonitoringLogDto monitoringLogDto) {
-        Optional<MonitoringLogEntity> foundLog = logMonitoringDao.findById(logId);
+    public void updateLog(String logId, MonitoringLogDto logDTO) {
+        Optional<MonitoringLogEntity> foundLog=logMonitoringDao.findById(logId);
         if (!foundLog.isPresent()){
             throw new DataPersistException("Log not found");
         }else {
-            foundLog.get().setTempId(monitoringLogDto.getTempId());
-            foundLog.get().setDate(monitoringLogDto.getDate());
-            foundLog.get().setDetails(monitoringLogDto.getDetails());
-            foundLog.get().setImage(MonitoringLogDto.getImage());
+            foundLog.get().setDate(logDTO.getDate());
+            foundLog.get().setObservation(logDTO.getObservation());
+            foundLog.get().setFieldEntity(logMapping.toFIeldEntity(logDTO.getFieldDto()));
 
         }
+
     }
 }

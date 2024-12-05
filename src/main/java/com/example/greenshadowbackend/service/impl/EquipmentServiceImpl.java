@@ -62,7 +62,8 @@ public class EquipmentServiceImpl implements EquipmentService {
             } else {
                 findEquipment.get().setName(equipmentDto.getName());
                 findEquipment.get().setStatus(equipmentDto.getStatus());
-                findEquipment.get().setType(equipmentDto.getType());
+                findEquipment.get().setEquipmentType(equipmentDto.getEquipmentType());
+                findEquipment.get().setStaff(equipmentMapping.toStaffEntity(equipmentDto.getStaff()));
             }
     }
 }

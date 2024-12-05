@@ -75,7 +75,7 @@ public class CropServiceImpl implements CropService {
             findCrop.get().setImage(cropDto.getImage());
             findCrop.get().setCategory(cropDto.getCategory());
             findCrop.get().setSeason(cropDto.getSeason());
-            findCrop.get().setFieldCode(cropDto.getFieldCode());
+            findCrop.get().setFieldEntity(cropMapping.toFIeldEntity(cropDto.getFieldDto()));
         }
     }
 }

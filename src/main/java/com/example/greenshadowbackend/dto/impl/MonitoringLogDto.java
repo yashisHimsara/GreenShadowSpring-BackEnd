@@ -1,5 +1,6 @@
 package com.example.greenshadowbackend.dto.impl;
 
+import com.example.greenshadowbackend.dto.LogStatus;
 import com.example.greenshadowbackend.dto.SuperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MonitoringLogDto implements SuperDTO {
-    private String logCode;
-    private String tempId;
-    private Date date;
-    private String details;
-    private String image;
-    private List<FieldDto> fields;
-    private List<CropDto> crops;
-    private List<StaffDto> staffs;
+public class MonitoringLogDto implements LogStatus {
+    String logCode;
+    Date date;
+    String observation;
+    String observationImage;
+    FieldDto fieldDto;
+    StaffDto staffDto;
+    CropDto cropDto;
 }

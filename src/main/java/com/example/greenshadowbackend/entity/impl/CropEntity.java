@@ -1,6 +1,6 @@
 package com.example.greenshadowbackend.entity.impl;
 
-import com.example.greenshadowbackend.dto.SuperDTO;
+import com.example.greenshadowbackend.entity.SuperEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,20 +13,21 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "Crop")
+public class CropEntity implements SuperEntity {
 
-public class CropEntity implements SuperDTO {
     @Id
-    private String cropCode;
-    @Column(unique = true)
-    private String commonName;
-    private String scientificName;
+    String cropCode;
+    String commonName;
+    String scientificName;
     @Column(columnDefinition = "LONGTEXT")
-    private String image;
-    private String category;
-    private String season;
+    String image;
+    String category;
+    String season;
+
     @ManyToOne
-    @JoinColumn(name = "fieldCode",nullable = false)
-    private FieldEntity fieldCode;
-    @OneToMany(mappedBy = "crops", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MonitoringLogEntity> logs;
+    @JoinColumn(name = "field_code" )
+    FieldEntity fieldEntity;
+
+    @OneToMany(mappedBy = "cropEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<MonitoringLogEntity> logEntityList;
 }

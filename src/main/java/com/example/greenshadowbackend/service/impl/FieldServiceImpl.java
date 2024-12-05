@@ -72,10 +72,10 @@ public class FieldServiceImpl implements FieldService {
             throw new FieldNotFoundException("Field not Found");
         }else {
             findField.get().setFieldName(fieldDto.getFieldName());
-            findField.get().setLocation(fieldDto.getLocation());
-            findField.get().setExtentSize(fieldDto.getExtent_size());
-            findField.get().setImage1(fieldDto.getImage1());
-            findField.get().setImage2(fieldDto.getImage2());
+            findField.get().setFieldLocation(fieldDto.getFieldLocation());
+            findField.get().setFieldSize(fieldDto.getFieldSize());
+            findField.get().setFieldImage(fieldDto.getFieldImage());
+            findField.get().setFieldImage2(fieldDto.getFieldImage2());
         }
     }
 }

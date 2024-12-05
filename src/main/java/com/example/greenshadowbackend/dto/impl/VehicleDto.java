@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VehicleDto implements VehicleStatus {
-    private String vehicleCode;
-    private String licensePlateNum;
-    private String category;
-    private String fuel_type;
-    private String status;
-    private String remarks;
-    private String staffId;
+    String vehicleCode;
+    String licensePlateNum;
+    String category;
+    String fuelType;
+    String status;
+    String remarks;
+    StaffDto staff;
 }
