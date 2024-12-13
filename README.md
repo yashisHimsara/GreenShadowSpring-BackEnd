@@ -1,5 +1,9 @@
 # Green Shadow Spring Boot Application
 
+
+![Spring Boot](https://1.bp.blogspot.com/-TevOgPVC2dE/WnILAnucRVI/AAAAAAAAGU0/OlrnoLsf2fs9aKpm9_BGEqk5R54gUCZbgCLcBGAs/s1600/spring-boot.png)
+
+
 ## Overview
 The Green Shadow application is a robust backend system built on Spring Boot. It offers a suite of RESTful APIs designed for comprehensive management of crops, equipment, fields, staff, users, vehicles, monitoring logs, and transactions. The application leverages a range of technologies including Spring Boot, JPA, Hibernate, Spring Security, and MySQL for seamless database connectivity.
 
